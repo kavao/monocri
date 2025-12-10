@@ -1,0 +1,10 @@
+_how_to/*
+!_how_to/.gitkeep
+_workingspace/*
+!_workingspace/.gitkeep
+!_workingspace/log/.gitkeep
+writers\*
+!writers\000_default\writer_profile.md
+novels/*
+!novels/.gitkeep
+**/unused
