@@ -31,7 +31,7 @@ Monogatari Creatorは主に以下のモードで進行します。
 
 0.  **Source Material Intake Mode（資料取り込み／資料展開）**:
     - `source_material/` または `novels/_import/` を一次情報源として、Monogatari Creator形式へ展開します。
-    - 原資料を解析し、`proposal.md` / `design_specification.md` / `character.md` / `world.md` / `_novel_text/` などを自動生成・整備します。
+    - 原資料を解析し、`proposal.md` / `design_specification.md` / `character.md` / `world.md` / `_novel_text/` / `_novel_text_re/` などを自動生成・整備します。
 
 1.  **Reqruit Mode**:
     - 執筆プロジェクトに必要なメンバー（作家、下読み、読者）をアサインします。
@@ -48,11 +48,16 @@ Monogatari Creatorは主に以下のモードで進行します。
 4.  **Meta Management Mode（メタ情報管理）**:
     - 執筆の節目で `_meta.md` を更新し、進捗、伏線、次回のタスク（内部メタ）や、投稿用の紹介文（外部メタ）を管理します。
 
-5.  **First Reader Mode（下読み・足きり判定）**:
+5.  **Writing Mode Refinement（清書・文章校正）**:
+    - `_how_to/rewrite.md` を利用して、初稿の文章をより自然で文学的な表現に磨き上げます。
+    - 語彙の変換、主語の調整、文体の統一、官能描写の深化などを行い、読者の没入感を高めます。
+    - 校正後のファイルは、各作品ディレクトリ内の `_novel_text/` に出力されます。バックアップは`_novel_text_backup/`に待避します。
+
+6.  **First Reader Mode（下読み・足きり判定）**:
     - `_how_to/reader.md` の基準に従い、商業的な最低基準をクリアしているか（足きりされないか）を厳格に判定します。
     - 判定結果は `_reader/` 配下に詳細な書評ファイルとして保存されます。
 
-6.  **Interest Check Mode（一般読者・興味判定）**:
+7.  **Interest Check Mode（一般読者・興味判定）**:
     - `_how_to/standard_reader.md` とペルソナ（例：田中あかり）を用い、タイトルや冒頭3行での「離脱率」を予測します。
     - 読者の第一印象を重視し、ブラウザバックを防ぐための改善案を提示します。
 
