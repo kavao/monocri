@@ -1,22 +1,75 @@
-# Monogatari Creator
-Monogatari Creator :Novel Generation Support Tool
+# Monogatari Coach
+Monogatari Coach :Novel Generation Support Tool
 
-Monogatari Creatorは、小説執筆のすべてを管理し、作品の質を向上させるための包括的な執筆支援ツールです。企画から執筆、推敲、そしてメディアミックス展開（マンガ化など）までをサポートします。
+Monogatari Coachは、小説執筆のすべてを管理し、作品の質を向上させるための包括的な執筆支援ツールです。企画から執筆、推敲、そしてメディアミックス展開（マンガ化など）までをサポートします。
+
+MIT Licenseです。  
 
 ## はじめに (Setup)
 
-**最初に必ず `init.bat` を実行してください。**
+**1. npmの導入と `rulesync` のインストール**
 
-このバッチファイルを実行することで、`_how_to.example` から `_how_to` ディレクトリに必要なテンプレートファイル（創作技法ファイルなど）がコピーされ、執筆環境が初期化されます。
+本プロジェクトでは、AI用のカスタム指示（ルールファイル）を共通化・管理するために `rulesync` を使用しています。
+これにより、**Cursor** や **Antigravity** といったエディタだけでなく、**Claude Code**、**Kilo code**、**Cline**、さらには **ChatGPT (Codex CLI)** や **Claude (Claude Code)** といった各種LLM環境に対しても、同一の執筆ルールを自動的に最適化して適用することが可能です。VS CODEおよび互換エディタ上での利用を前提としております。
+
+Node.js (npm) がインストールされている環境で、以下のコマンドを実行して導入してください。
+
+- Node.js  
+https://nodejs.org/en/download
+
+- rulesync  
+https://github.com/dyoshikawa/rulesync
+
+```bash
+npm install -g rulesync
+```
+
+これにより、プロジェクト内のルールファイルが同期・共通化されます。
+
+**2. Pythonの導入と `howto_init.py` の実行**
+
+次に、必ず `howto_init.py` を実行してください。
+このスクリプトを実行することで、`_how_to.example` から `_how_to` ディレクトリに必要なテンプレートファイル（創作技法ファイルなど）がコピーされ、執筆環境が初期化されます。
 ※すでにファイルが存在する場合は上書きされません。
 
-## サポート
-現時点では、Cursorと、Antigravity に対応しております。
+Python 3.x がインストールされている環境で、以下のコマンドを実行してください。
 
+- Python 3.x
+https://www.python.org/downloads/
+
+```bash
+python howto_init.py
+```
+
+## 🛠️ ルール同期の管理 (Rule Sync)
+
+プロジェクトのルールやスキルを更新・同期する場合は、以下の手順と注意点を確認してください。
+
+### 基本的な注意点
+- **直接 `.cursor/rules/` などの生成ファイルを編集しないでください。** これらは `rulesync` によって自動生成されるため、直接編集しても上書きされて消えてしまいます。
+- ルールを更新したい場合は、必ず `.rulesync/` ディレクトリ配下のソースファイルを編集してください。
+
+### 更新の手順
+1. 実行により `.rulesync/` 内の該当ファイルを踏襲します：
+   - 指示文の追加・修正: `.rulesync/**/*.md`
+   - スキルの定義: `.rulesync/skills/*/SKILL.md`
+   - MCP設定: `.rulesync/mcp.json`
+   - フック設定: `.rulesync/hooks.json`
+   - 無視設定: `.rulesync/.aiignore`
+2. 以下のコマンドを実行して設定ファイルを再生成します：
+
+```bash
+python sync_rules.py
+```
+
+これにより、最新のルールがプロジェクト全体に適用されます。
+
+## サポート
+現時点では、Cursor、Claude CLI、Kilo code を中心に確認しております。
 
 ## 全体構造
 
-Monogatari Creatorは以下のディレクトリ構造で管理されています。
+Monogatari Coachは以下のディレクトリ構造で管理されています。
 
 - **writers/**: 作家プロフィールを格納（文体、作風など）。
 - **novels/**: 作品ごとのディレクトリ。本文や設定資料はここに含まれます。
@@ -27,10 +80,10 @@ Monogatari Creatorは以下のディレクトリ構造で管理されていま�
 
 ## モードとワークフロー (Modes)
 
-Monogatari Creatorは主に以下のモードで進行します。
+Monogatari Coachは主に以下のモードで進行します。
 
 0.  **Source Material Intake Mode（資料取り込み／資料展開）**:
-    - `source_material/` または `novels/_import/` を一次情報源として、Monogatari Creator形式へ展開します。
+    - `source_material/` または `novels/_import/` を一次情報源として、Monogatari Coach形式へ展開します。
     - 原資料を解析し、`proposal.md` / `design_specification.md` / `character.md` / `world.md` / `_novel_text/` / `_novel_text_re/` などを自動生成・整備します。
 
 1.  **Reqruit Mode**:
@@ -83,6 +136,19 @@ Monogatari Creatorは主に以下のモードで進行します。
 
 既存の作品ディレクトリ（例: `novels/001_ExistingNovel/`）の中で新しい別の話を書き始めないでください。設定やコンテキストが混ざり合い、正しく出力できなくなる可能性があります。
 必ず `novels/002_NewTitle/` のように、作品ごとにフォルダを明確に分けて運用してください。
+
+## 作例 (Examples)
+
+### 1. 隣の老紳士のケーキ (novels/000_old_man_next_door's_cake)
+Claude Code を使用して執筆された短編小説の作例です。
+企画書、キャラクター設定、世界観設定から、実際の本文執筆、そして下読み（First Reader）による評価まで、Monogatari Coach の標準的なワークフローを網羅しています。
+
+- [GitHub で作品ディレクトリを見る](https://github.com/kavao/monocri/tree/main/novels/000_old_man_next_door's_cake)
+- **内容**: 孤独な青年と、隣に住む不思議な老紳士が「ケーキ」を通じて心を通わせる、温かな日常ファンタジー。
+- **活用ポイント**: 
+  - `proposal.md`: Claude Code による企画の具体化。
+  - `_novel_text/`: 章ごとの分割執筆。
+  - `_reader/`: AIによる客観的な書評と改善提案のログ。
 
 ## 作業のワークフロー例
 
@@ -153,14 +219,14 @@ world.md をお願いします。
 
 ## ベータ実験参加募集
 
-Monogatari Creatorの実証実験に参加しませんか？ 執筆効率向上のデータを共有いただける方を募集します。
+Monogatari Coachの実証実験に参加しませんか？ 執筆効率向上のデータを共有いただける方を募集します。
 
 ### 参加条件
 - Cursorエディタ/Antigravityユーザー/Kilo codeユーザー。
 - 創作経験者（小説執筆推奨）。
 
 ### 参加方法
-- Monogatari Creatorのベータ実験を共に！ 執筆支援ツールのフィードバックを共有しましょう。
+- Monogatari Coachのベータ実験を共に！ 執筆支援ツールのフィードバックを共有しましょう。
 ものかきAI チャンネルにご加入くださいませ
 
 [🚀 ものかきAI に参加する](https://discord.gg/8Dtffz7X7f)

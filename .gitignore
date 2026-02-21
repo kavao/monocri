@@ -1,3 +1,4 @@
+__pycache__/
 _how_to/*
 !_how_to/.gitkeep
 _workingspace/*
@@ -7,5 +8,20 @@ writers/*
 !writers/000_default/writer_profile.md
 novels/*
 !novels/.gitkeep
+!novels/import/
+!novels/import/.gitkeep
+!novels/000_old_man_next_door's_cake/
+!novels/000_old_man_next_door's_cake/*
+!novels/000_old_man_next_door's_cake/**   # サブフォルダまで許可
 progress.md
 **/unused
+.claude/*
+.vscode/*
+.cursor/*
+.codex/*
+.github/*
+.kilocode/*
+.cursorignore
+.mcp.json
+CLAUDE.md
+AGENTS.md
