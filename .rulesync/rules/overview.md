@@ -221,25 +221,25 @@ _how_to/tag.md のルールに従い、各人物について
 ```
 
 ### 2.2.2 Manga Tag Mode（漫画タグ出力：マンガ構成案確定後／一括生成前）
-マンガの構成案（`manga_XX.md`のStep 1）に基づき、画像生成AI向けの具体的なプロンプトタグを **YAML形式（Step 2）** で出力する。  
+マンガの構成案（`manga_XX.md`のStep 1）に基づき、抽象的な構図を **Step 2** で出力する。  
 原則として、**マンガの構成・コマ割りが確定した後（Writing/Mangaの一部）**に必ず行う。
 
 #### 目的
 - 各コマの状況、人物、アクションを正確に言語化し、AI画像生成（NovelAI/Stable Diffusion等）で一貫性のある漫画を生成可能にする。
 
 #### 参照ルール（必須）
-- `_how_to/manga_tag.md` および `_how_to/manga.md` を必ず参照し、同ファイルのルール・出力形式（YAMLスキーマ）に従う。
+- `_how_to/manga_tag.md` および `_how_to/manga.md` を必ず参照し、同ファイルのルール・出力形式に従う。
 
 #### 出力先（必須）
-- `novels/[novel_code]_[novel_title]/manga/manga_XX.md` 内に、Step 1（構成案）に続けて Step 2（YAML形式のプロンプト）を出力、または追記する。
+- `novels/[novel_code]_[novel_title]/manga/manga_XX.md` 内に、Step 1（構成案）に続けて Step 2を出力、または追記する。
 
 #### 手動手順（明確化）
 1. **前提チェック**  
    - `novels/[...]/manga/manga_XX.md` のStep 1（構成案：3-5コマ程度）が作成済みであることを確認する。
 2. **タグ生成（コマごと）**  
-   - `_how_to/manga_tag.md` のタグセット（SFW/NSFW/構図/効果音等）を使用し、各コマの場所、人物、状態、アクションを明確にしたプロンプトを作成する。
-3. **YAML化（一括出力）**  
-   - `_how_to/manga.md` のStep 2（YAMLスキーマ）に従い、全コマの情報を構造化データとして出力する。
+   - `_how_to/manga_tag.md` のタグセット（構図/効果音等）を使用し、各コマの場所、人物、状態、アクションを明確にしたプロンプトを作成する。
+3. **漫画タグ化（一括出力）**  
+   - `_how_to/manga.md` のStep 2に従い、全コマの情報を構成案として出力する。
    - 共通タグと個別タグを適切に結合する。
 
 #### “コマンド（指示文）”テンプレ（チャットで使う）
@@ -249,7 +249,7 @@ _how_to/tag.md のルールに従い、各人物について
 漫画タグモードでお願いします。
 Manga Tag Modeでお願いします。
 _how_to/manga_tag.md のルールに従い、
-manga/manga_XX.md の各コマについてYAML形式で出力してください。
+manga/manga_XX.md の各コマについて出力してください。
 ```
 
 ### 2.3 Writing Mode
